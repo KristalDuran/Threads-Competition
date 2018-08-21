@@ -7,28 +7,32 @@ package graphicInterface;
 
 
 import domain.*;
-import java.awt.Component;
-import java.awt.Panel;
 import utility.Variables;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import logic.LogicCharacter;
+import utility.VariablesInteface;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.nio.BufferOverflowException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import logic.LogicCharacter;
-import utility.VariablesInteface;
 
 public class compe extends Application implements Runnable, VariablesInteface{
 
@@ -43,11 +47,13 @@ public class compe extends Application implements Runnable, VariablesInteface{
     private Button btnRevert;
     private Button btnSimulation;
     private Button btnInterrupt;
-    private TextArea txtSpeed;
-    private TextArea txtValues;
-    private TextArea txtLanes;
+    private TextField txtSpeed;
+    private TextField txtValues;
+    private TextField txtLanes;
     private Group root;
     private Avatar avatar;
+
+    GraphicsContext gc;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -60,26 +66,132 @@ public class compe extends Application implements Runnable, VariablesInteface{
     @Override
     public void run() {
         
-        long start;
-        long elapsed;
-        long wait;
-        int fps = 30;
-        long time = 1000/fps;
-
+        long start = System.nanoTime();
+        long elapsed = System.nanoTime()-start;
+        int fps = 60;
+        long time = 1000 / fps;
+        long wait = time - elapsed / 1000000;
+        
         while(true){
             try {
-                start=System.nanoTime();
-                elapsed=System.nanoTime()-start;                    
-                wait = time-elapsed/1000000;
+                
+                
+                System.out.println("wait is: " + wait);
                 Thread.sleep(wait);
-                GraphicsContext gc = this.canvas.getGraphicsContext2D();
                 draw(gc);
             } 
             catch (InterruptedException ex) {}
         }
     }
 
-    private void initComponents(Stage primaryStage) {
+    private void initComponents(Stage primaryStage) throws FileNotFoundException {
+        try {
+            //pintar{
+            canvas = new Canvas(703, 600);
+            gc = canvas.getGraphicsContext2D();
+            //}
+            
+            //paneles{
+            StackPane pane = new StackPane();
+            Scene scene = new Scene(pane, 703, 600);
+            GridPane grid = new GridPane();
+            //}
+            
+            //botones{
+            this.btnCreat = new Button("Create");
+            this.btnBarrier = new Button("Barrier");
+            this.btnRevert = new Button("Revert");
+            this.btnSimulation = new Button("Simulation");
+            this.btnInterrupt = new Button("Interrupt");
+            //}
+            
+            //txt{
+            this.txtLanes = new TextField();
+            this.txtSpeed = new TextField();
+            this.txtValues = new TextField();
+            
+            this.txtLanes.setPromptText("carriles");
+            this.txtSpeed.setPromptText("velocidad");
+            this.txtValues.setPromptText("cantidad");
+            
+          
+            //}
+
+            grid.addRow(0, txtSpeed, txtValues, btnBarrier, btnRevert, btnInterrupt);
+            grid.addRow(1, btnCreat, txtLanes, btnSimulation);
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(10, 10, 10, 10));
+
+            grid.setAlignment(Pos.BOTTOM_CENTER);
+
+            this.image = new Image(new FileInputStream("src/imgs/Track.JPG"));
+            gc.drawImage(this.image , 50, 0);
+            
+            pane.getChildren().addAll(canvas, grid);
+            
+            
+            primaryStage.setScene(scene);    
+            
+            
+            logicCharacter.makeAvatars(1,3);
+            logicCharacter.makeAvatars(2,4);//esto es para prueba mientras se agrega los botones 
+            logicCharacter.makeAvatars(3,4);
+            
+            this.thread = new Thread(this);
+            this.thread.start();
+            
+        } 
+        catch (BufferOverflowException ex){}
+    }
+
+    private void draw(GraphicsContext gc){
+        
+        gc.clearRect(0, 0, Variables.WIDTH, Variables.HEIGHT);
+        gc.drawImage(this.image, 50, 10); 
+        Avatar current;
+        for (int i = 0; i < listAvatars.size(); i++) {
+            //System.out.println("i "+i);
+            current = listAvatars.get(i);
+            String img =  current.getFigure().getDirectionImage();
+            try {
+                current.getFigure().setImage(new Image(new FileInputStream(img)));
+                Image imageAvatar = current.getFigure().getImage();
+                gc.drawImage(imageAvatar, current.getLocation().getPosX(), current.getLocation().getPosY());
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(compe.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void setDetails(Button button, TextArea txt, int x, int y, int width, int heigh){
+        if (button != null) {
+            button.setPrefHeight(heigh);
+            button.setPrefWidth(width);
+            button.setTranslateX(x);
+            button.setTranslateY(y);
+        }else{
+            txt.setPrefHeight(heigh);
+            txt.setPrefWidth(width);
+            txt.setTranslateX(x);
+            txt.setTranslateY(y);
+        }
+    }
+    
+    EventHandler<WindowEvent> exit = new EventHandler<WindowEvent>() {
+        @Override
+        public void handle(WindowEvent event) {
+            System.exit(0);
+        }
+    };
+
+}
+
+
+
+
+/*
+private void initComponents(Stage primaryStage) {
         try {
             
             this.root = new Group();
@@ -88,12 +200,15 @@ public class compe extends Application implements Runnable, VariablesInteface{
             this.canvas = new Canvas(Variables.WIDTH, Variables.HEIGHT);
             this.image = new Image(new FileInputStream("src/imgs/Track.JPG"));
             this.pane.getChildren().add(this.canvas);
+            
             primaryStage.setScene(this.scene);            
+            
             this.btnCreat = new Button("Create");
             this.btnBarrier = new Button("Barrier");
             this.btnRevert = new Button("Revert");
             this.btnSimulation = new Button("Simulation");
             this.btnInterrupt = new Button("Interrupt");
+            
             this.txtLanes = new TextArea();
             this.txtSpeed = new TextArea();
             this.txtValues = new TextArea();
@@ -134,44 +249,4 @@ public class compe extends Application implements Runnable, VariablesInteface{
         catch (FileNotFoundException ex){}
         catch (BufferOverflowException ex){}
     }
-
-    private void draw(GraphicsContext gc){
-        
-        gc.clearRect(0, 0, Variables.WIDTH, Variables.HEIGHT);
-        gc.drawImage(this.image, 110, 10); 
-        
-        for (int i = 0; i < listAvatars.size(); i++) {
-            System.out.println("i "+i);
-            String img =  listAvatars.get(i).getFigure().getDirectionImage();
-            try {
-                listAvatars.get(i).getFigure().setImage(new Image(new FileInputStream(img)));
-                Image imageAvatar = listAvatars.get(i).getFigure().getImage();
-                gc.drawImage(imageAvatar, listAvatars.get(i).getLocation().getPosX(),listAvatars.get(i).getLocation().getPosY());
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(compe.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-    
-    EventHandler<WindowEvent> exit = new EventHandler<WindowEvent>() {
-        @Override
-        public void handle(WindowEvent event) {
-            System.exit(0);
-        }
-    };
-    
-    public void setDetails(Button button, TextArea txt, int x, int y, int width, int heigh){
-        if (button != null) {
-            button.setPrefHeight(heigh);
-            button.setPrefWidth(width);
-            button.setTranslateX(x);
-            button.setTranslateY(y);
-        }else{
-            txt.setPrefHeight(heigh);
-            txt.setPrefWidth(width);
-            txt.setTranslateX(x);
-            txt.setTranslateY(y);
-        }
-    }
-}
-
+*/

@@ -45,7 +45,7 @@ public class LogicTrack implements VariablesInteface{
     public void makeLanes(){
         for (int i = 0; i < 11; i++) {
             Lane lane = new Lane();
-            lane.setLineNumber(i+1);
+            lane.setLineNumber(i + 1);
             listLanes.add(lane);
         }
     }

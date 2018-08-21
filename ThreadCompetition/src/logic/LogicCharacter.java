@@ -106,9 +106,8 @@ public class LogicCharacter implements VariablesInteface{
         Location location = new Location();
         location.setPosY(0);
         Lane lane = logicTrack.defineLane();
-        
-            location.setPosX(70 + (lane.getLineNumber()*40) + (lane.getLineNumber()*12+(listAvatars.size()*2)));
-        location.setPosY(0);
+
+        location.setPosX(10 + (lane.getLineNumber()*40) + (lane.getLineNumber()*12+(listAvatars.size()*2)));
         location.setLane(lane);
         return location;
     }

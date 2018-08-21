@@ -66,15 +66,17 @@ public class Avatar extends Thread{
     
     @Override
     public void run(){
+        
+        int wait = 100/speed.getSpeed();
+        
         while(true) {
             try {
-                while (location.getPosY() < 410) {
-                    Thread.sleep(100/speed.getSpeed());
-                    location.setPosY(location.getPosY()+10);
+                while (location.getPosY() <= 410) {
+                    Thread.sleep(wait);
+                    location.setPosY(location.getPosY() + 1);
                 }
-
                 this.figure.setImage(null);
-                Thread.sleep(100000);
+                break;
             } catch (InterruptedException ex) {
                 Logger.getLogger(Avatar.class.getName()).log(Level.SEVERE, null, ex);
             }    

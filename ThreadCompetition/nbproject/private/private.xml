@@ -3,31 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/domain/Location.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/domain/Avatar.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/imgs/redFigure.png</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/imgs/redCarRevers.png</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/domain/Lane.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/imgs/yellowCarRevers.png</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/imgs/yellowFigure.png</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/domain/Figure.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/domain/Speed.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/logic/LogicCharacter.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/graphicInterface/compe.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/imgs/yellowCar.png</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/imgs/blueCarRevers.png</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/graphicInterface/menu.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/utility/VariablesInteface.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/domain/Direction.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/imgs/blueCar.png</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/imgs/Track.JPG</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/imgs/blueFigure.png</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/utility/Variables.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/logic/main.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/domain/Barrier.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/logic/LogicTrack.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/graphicInterface/competition.java</file>
-            <file>file:/C:/Users/kris/Desktop/TEC/IV%20II%20Semestre%202018/Lenguajes/Proyectos/Proyecto%201%20threads/ThreadCompetition/src/imgs/redCar.png</file>
+            <file>file:/C:/Users/USUARIO/Desktop/Proyecto%20Cluster/ProyectoCluster/Threads-Competition/ThreadCompetition/src/logic/LogicCharacter.java</file>
+            <file>file:/C:/Users/USUARIO/Desktop/Proyecto%20Cluster/ProyectoCluster/Threads-Competition/ThreadCompetition/src/graphicInterface/compe.java</file>
+            <file>file:/C:/Users/USUARIO/Desktop/Proyecto%20Cluster/ProyectoCluster/Threads-Competition/ThreadCompetition/src/logic/LogicTrack.java</file>
+            <file>file:/C:/Users/USUARIO/Desktop/Proyecto%20Cluster/ProyectoCluster/Threads-Competition/ThreadCompetition/src/domain/Avatar.java</file>
+            <file>file:/C:/Users/USUARIO/Desktop/Proyecto%20Cluster/ProyectoCluster/Threads-Competition/ThreadCompetition/nbproject/build-impl.xml</file>
         </group>
     </open-files>
 </project-private>
