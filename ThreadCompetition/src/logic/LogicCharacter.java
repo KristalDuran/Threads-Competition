@@ -63,15 +63,6 @@ public class LogicCharacter implements VariablesInteface{
         
     }
 
-    /**
-     * @param Character 
-     * @return
-     */
-    public void changeLocation(Character pCharacter) {
-        // TODO implement here
-
-    }
-
     
     public void makeAvatars(int pSpeed, int pValues){ 
         System.out.println("Creando avatars");
