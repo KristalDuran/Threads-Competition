@@ -71,13 +71,13 @@ public class Avatar extends Thread{
         
         while(true) {
             try {
-                while (location.getPosY() <= 410 || (this.isRevert && location.getPosY() > 0)) {
+                while (location.getPosY() <= 410 || (this.isRevert == true && location.getPosY() > 0)) {
                     Thread.sleep(wait);
-                    if (this.isRevert) {
-                        location.setPosY(location.getPosY() + 1);
+                    if (this.isRevert == true) {
+                        location.setPosY(location.getPosY() - 1);
                         changeImagen();
                     }else{
-                        location.setPosY(location.getPosY() - 1);
+                        location.setPosY(location.getPosY() + 1);
                         changeImagen();
                     }
                 }
@@ -95,12 +95,12 @@ public class Avatar extends Thread{
             //poner imagen 
             figure.setImage(sprite.get(2));
         }else{
-            if(this.isRevert){
+            if(this.isRevert == true){
                 //set bien
-                figure.setImage(sprite.get(0));
+                figure.setImage(sprite.get(1));
             }else{
                 //set alverris
-                figure.setImage(sprite.get(1));
+                figure.setImage(sprite.get(0));
             }
         }
             

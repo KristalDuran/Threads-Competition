@@ -45,7 +45,7 @@ public class LogicCharacter implements VariablesInteface{
     public void changeDirection() {
         // TODO implement here
         for (int posAvatar = 0; posAvatar < listAvatars.size(); posAvatar++) {
-            if(listAvatars.get(posAvatar).getDirection()){
+            if(listAvatars.get(posAvatar).getDirection() == true){
                 listAvatars.get(posAvatar).setDirection(false);
             }
             else{
