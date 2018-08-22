@@ -29,15 +29,30 @@ public class LogicCharacter implements VariablesInteface{
      */
     public void changeAvatar(Character pCharacter) {
         // TODO implement here
+        for (int posAvatar = 0; posAvatar < listAvatars.size(); posAvatar++) {
+            if(listAvatars.get(posAvatar).getFigure().isIsForm()){
+                listAvatars.get(posAvatar).getFigure().setIsForm(false);
+            }
+            else{
+                listAvatars.get(posAvatar).getFigure().setIsForm(true);
+            }
+        }
     }
 
     /**
      * @param Character 
      * @return
      */
-    public void changeDirection(Character pCharacter) {
+    public void changeDirection() {
         // TODO implement here
-      
+        for (int posAvatar = 0; posAvatar < listAvatars.size(); posAvatar++) {
+            if(listAvatars.get(posAvatar).getDirection()){
+                listAvatars.get(posAvatar).setDirection(false);
+            }
+            else{
+                listAvatars.get(posAvatar).setDirection(true);
+            }
+        }
     }
 
     /**
@@ -66,7 +81,7 @@ public class LogicCharacter implements VariablesInteface{
                 Avatar avatar;
                 avatar = new Avatar();
                 Figure figure = setForm(pSpeed);
-                avatar.setDirection(new Direction());
+                avatar.setDirection(false);
                 avatar.setFigure(figure);
                 avatar.setSpeed(new Speed(pSpeed));
                 avatar.setLocation(setLocation());
@@ -111,4 +126,12 @@ public class LogicCharacter implements VariablesInteface{
         location.setLane(lane);
         return location;
     }
+    
+    public int getInteger(String text){
+        if(text != null || text != ""){
+            return Integer.parseInt(text);
+        }
+        return 0;
+    }
+    
 }

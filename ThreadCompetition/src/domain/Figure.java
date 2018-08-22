@@ -15,6 +15,7 @@ public class Figure {
     private String directionImage;
     private String directionImageRevers;
     private Image image;
+    private boolean isForm;
     
     public String getDirectionForm() {
         return directionForm;
@@ -46,6 +47,14 @@ public class Figure {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public boolean isIsForm() {
+        return isForm;
+    }
+
+    public void setIsForm(boolean isForm) {
+        this.isForm = isForm;
     }
 
     

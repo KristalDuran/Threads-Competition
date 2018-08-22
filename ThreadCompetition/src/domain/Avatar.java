@@ -17,7 +17,7 @@ public class Avatar extends Thread{
 
     private Speed speed;
     private Location location;
-    private Direction direction;
+    private boolean isRevert;
     private Figure figure;
     private Image image;
     private ArrayList<Image> sprite = new ArrayList<>();
@@ -38,12 +38,12 @@ public class Avatar extends Thread{
         this.location = location;
     }
 
-    public Direction getDirection() {
-        return direction;
+    public boolean getDirection() {
+        return isRevert;
     }
 
-    public void setDirection(Direction direction) {
-        this.direction = direction;
+    public void setDirection(boolean direction) {
+        this.isRevert = direction;
     }
 
     public Figure getFigure() {
@@ -71,16 +71,38 @@ public class Avatar extends Thread{
         
         while(true) {
             try {
-                while (location.getPosY() <= 410) {
+                while (location.getPosY() <= 410 || (this.isRevert && location.getPosY() > 0)) {
                     Thread.sleep(wait);
-                    location.setPosY(location.getPosY() + 1);
+                    if (this.isRevert) {
+                        location.setPosY(location.getPosY() + 1);
+                        changeImagen();
+                    }else{
+                        location.setPosY(location.getPosY() - 1);
+                        changeImagen();
+                    }
                 }
-                this.figure.setImage(null);
-                break;
+                this.finalize();
             } catch (InterruptedException ex) {
+                Logger.getLogger(Avatar.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Throwable ex) {
                 Logger.getLogger(Avatar.class.getName()).log(Level.SEVERE, null, ex);
             }    
         }
     }
     
+    private void changeImagen(){
+        if (figure.isIsForm()) {
+            //poner imagen 
+            figure.setImage(sprite.get(2));
+        }else{
+            if(this.isRevert){
+                //set bien
+                figure.setImage(sprite.get(0));
+            }else{
+                //set alverris
+                figure.setImage(sprite.get(1));
+            }
+        }
+            
+    }
 }

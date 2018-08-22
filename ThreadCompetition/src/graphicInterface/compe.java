@@ -7,6 +7,7 @@ package graphicInterface;
 
 
 import domain.*;
+import java.awt.event.MouseEvent;
 import utility.Variables;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,9 +75,6 @@ public class compe extends Application implements Runnable, VariablesInteface{
         
         while(true){
             try {
-                
-                
-                System.out.println("wait is: " + wait);
                 Thread.sleep(wait);
                 draw(gc);
             } 
@@ -113,8 +111,6 @@ public class compe extends Application implements Runnable, VariablesInteface{
             this.txtLanes.setPromptText("carriles");
             this.txtSpeed.setPromptText("velocidad");
             this.txtValues.setPromptText("cantidad");
-            
-          
             //}
 
             grid.addRow(0, txtSpeed, txtValues, btnBarrier, btnRevert, btnInterrupt);
@@ -125,6 +121,30 @@ public class compe extends Application implements Runnable, VariablesInteface{
 
             grid.setAlignment(Pos.BOTTOM_CENTER);
 
+            this.btnCreat.setOnMouseClicked((event)->{
+                int speed = logicCharacter.getInteger(txtSpeed.getText());
+                int values = logicCharacter.getInteger(txtValues.getText());
+                logicCharacter.makeAvatars(speed, values);
+            });
+            
+            this.btnBarrier.setOnMouseClicked((event)->{
+                //colocar barrera
+                //lo que se ingrese seria una lista de numeros, manejar eso bien
+                //logicCharacter.
+            });
+            
+            this.btnRevert.setOnMouseClicked((event)->{
+                logicCharacter.changeDirection();
+            });
+            
+            this.btnInterrupt.setOnMouseMoved((event)->{
+                this.thread.interrupt();
+            });
+            
+            this.btnSimulation.setOnMouseClicked((event)->{
+                //llamar a metodo simulacion 
+            });
+            
             this.image = new Image(new FileInputStream("src/imgs/Track.JPG"));
             gc.drawImage(this.image , 50, 0);
             
@@ -132,11 +152,6 @@ public class compe extends Application implements Runnable, VariablesInteface{
             
             
             primaryStage.setScene(scene);    
-            
-            
-            logicCharacter.makeAvatars(1,3);
-            logicCharacter.makeAvatars(2,4);//esto es para prueba mientras se agrega los botones 
-            logicCharacter.makeAvatars(3,4);
             
             this.thread = new Thread(this);
             this.thread.start();
@@ -153,14 +168,9 @@ public class compe extends Application implements Runnable, VariablesInteface{
         for (int i = 0; i < listAvatars.size(); i++) {
             //System.out.println("i "+i);
             current = listAvatars.get(i);
-            String img =  current.getFigure().getDirectionImage();
-            try {
-                current.getFigure().setImage(new Image(new FileInputStream(img)));
-                Image imageAvatar = current.getFigure().getImage();
-                gc.drawImage(imageAvatar, current.getLocation().getPosX(), current.getLocation().getPosY());
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(compe.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Image img =  current.getFigure().getImage();
+            current.getFigure().setImage(img);
+            gc.drawImage(img, current.getLocation().getPosX(), current.getLocation().getPosY());
         }
     }
     

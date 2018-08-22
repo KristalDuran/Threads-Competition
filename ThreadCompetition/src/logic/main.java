@@ -15,8 +15,6 @@ import javafx.application.Application;
 public class main {
     
     public static void main(String[] args){
-        //competition compe = new competition();
-        //compe.setVisible(true);4
         LogicTrack lo = new LogicTrack();
         lo.makeLanes();        
         Application.launch(compe.class, args);

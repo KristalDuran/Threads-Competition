@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/USUARIO/Desktop/Proyecto%20Cluster/ProyectoCluster/Threads-Competition/ThreadCompetition/src/logic/LogicCharacter.java</file>
-            <file>file:/C:/Users/USUARIO/Desktop/Proyecto%20Cluster/ProyectoCluster/Threads-Competition/ThreadCompetition/src/graphicInterface/compe.java</file>
-            <file>file:/C:/Users/USUARIO/Desktop/Proyecto%20Cluster/ProyectoCluster/Threads-Competition/ThreadCompetition/src/logic/LogicTrack.java</file>
-            <file>file:/C:/Users/USUARIO/Desktop/Proyecto%20Cluster/ProyectoCluster/Threads-Competition/ThreadCompetition/src/domain/Avatar.java</file>
-            <file>file:/C:/Users/USUARIO/Desktop/Proyecto%20Cluster/ProyectoCluster/Threads-Competition/ThreadCompetition/nbproject/build-impl.xml</file>
+            <file>file:/Users/kduran/Documents/TEC/Lenguajes/Proyects/Threads-Competition/ThreadCompetition/src/utility/VariablesInteface.java</file>
+            <file>file:/Users/kduran/Documents/TEC/Lenguajes/Proyects/Threads-Competition/ThreadCompetition/src/logic/LogicCharacter.java</file>
+            <file>file:/Users/kduran/Documents/TEC/Lenguajes/Proyects/Threads-Competition/ThreadCompetition/src/graphicInterface/compe.java</file>
+            <file>file:/Users/kduran/Documents/TEC/Lenguajes/Proyects/Threads-Competition/ThreadCompetition/src/domain/Avatar.java</file>
+            <file>file:/Users/kduran/Documents/TEC/Lenguajes/Proyects/Threads-Competition/ThreadCompetition/src/domain/Figure.java</file>
+            <file>file:/Users/kduran/Documents/TEC/Lenguajes/Proyects/Threads-Competition/ThreadCompetition/src/domain/Direction.java</file>
         </group>
     </open-files>
 </project-private>
