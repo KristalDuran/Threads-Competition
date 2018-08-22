@@ -99,7 +99,7 @@ public class LogicCharacter implements VariablesInteface{
         switch (pSpeed) {
             case 1:
                 figure.setDirectionImage("src/imgs/blueCar.png");
-                figure.setDirectionImageRevers("src/imgs/blueCarRevers.png");
+                figure.setDirectionImageRevers("src/imgs/blueCarRever.png");
                 figure.setDirectionForm("src/imgs/blueFigure.png");
             return figure;
             case 2:
@@ -109,7 +109,7 @@ public class LogicCharacter implements VariablesInteface{
             return figure;
             case 3:
                 figure.setDirectionImage("src/imgs/redCar.png");
-                figure.setDirectionImageRevers("src/imgs/redCarRevers.png");
+                figure.setDirectionImageRevers("src/imgs/redCarRever.png");
                 figure.setDirectionForm("src/imgs/redFigure.png");
             return figure;
         }
@@ -118,7 +118,7 @@ public class LogicCharacter implements VariablesInteface{
     
     public Location setLocation(){
         Location location = new Location();
-        location.setPosY(0);
+        location.setPosY(10);
         Lane lane = logicTrack.defineLane();
 
         location.setPosX(10 + (lane.getLineNumber()*40) + (lane.getLineNumber()*12+(listAvatars.size()*2)));

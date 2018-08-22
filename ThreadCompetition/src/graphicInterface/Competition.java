@@ -75,7 +75,6 @@ public class Competition extends Application implements Runnable, VariablesIntef
         
         while(true){
             try {
-                System.err.println("Hola");
                 Thread.sleep(wait);
                 draw(gc);
             } 
@@ -138,8 +137,8 @@ public class Competition extends Application implements Runnable, VariablesIntef
                 logicCharacter.changeDirection();
             });
             
-            this.btnInterrupt.setOnMouseMoved((event)->{
-                this.thread.interrupt();
+            this.btnInterrupt.setOnMouseClicked((event)->{
+                
             });
             
             this.btnSimulation.setOnMouseClicked((event)->{

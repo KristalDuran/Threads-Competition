@@ -71,7 +71,8 @@ public class Avatar extends Thread{
         
         while(true) {
             try {
-                while (location.getPosY() <= 410 || (this.isRevert == true && location.getPosY() > 0)) {
+                while ((location.getPosY() <= 410 && location.getPosY() >= 9) || (this.isRevert == true && location.getPosY() >= 10)) {
+                    System.out.println("y "+location.getPosY());
                     Thread.sleep(wait);
                     if (this.isRevert == true) {
                         location.setPosY(location.getPosY() - 1);
@@ -81,6 +82,7 @@ public class Avatar extends Thread{
                         changeImagen();
                     }
                 }
+                this.figure.setImage(null);
                 this.finalize();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Avatar.class.getName()).log(Level.SEVERE, null, ex);
