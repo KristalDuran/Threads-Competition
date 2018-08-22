@@ -1,7 +1,6 @@
 package logic;
 
 import domain.Avatar;
-import domain.Direction;
 import domain.Figure;
 import domain.Lane;
 import domain.Location;
