@@ -6,11 +6,12 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.image.Image;
+import utility.VariablesInteface;
 
 /**
  * 
  */
-public class Avatar extends Thread{
+public class Avatar extends Thread implements VariablesInteface{
 
     public Avatar(){
     }
@@ -68,10 +69,18 @@ public class Avatar extends Thread{
     public void run(){
         
         int wait = 100/speed.getSpeed();
-        
+        int lineNumber = getLocation().getLane().getLineNumber() - 1;
+        int indexInLine = getIndexInLane();
+                
         while(true) {
             try {
+                
                 while ((location.getPosY() <= 410 && location.getPosY() >= 9) || (this.isRevert == true && location.getPosY() >= 10)) {
+                    if((listLanes.get(lineNumber).getListAvatarsByLane().size() - 1) > indexInLine){
+                            if(Math.abs(listLanes.get(lineNumber).getListAvatarsByLane().get(indexInLine + 1).getLocation().getPosY() - this.getLocation().getPosY()) < 15){
+                                continue;
+                            }
+                        }
                     System.out.println("y "+location.getPosY());
                     Thread.sleep(wait);
                     if (this.isRevert == true) {
@@ -107,4 +116,16 @@ public class Avatar extends Thread{
         }
             
     }
+    
+    private int getIndexInLane(){
+        int myListIndex = this.getLocation().getLane().getLineNumber() - 1;
+        for(int i = listLanes.get(myListIndex).getListAvatarsByLane().size() -1; i >= 0; i--){
+            if(listLanes.get(myListIndex).getListAvatarsByLane().get(i).getLocation().getPosX() == getLocation().getPosX() 
+                    && listLanes.get(myListIndex).getListAvatarsByLane().get(i).getLocation().getPosY() == getLocation().getPosY()){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
 }
