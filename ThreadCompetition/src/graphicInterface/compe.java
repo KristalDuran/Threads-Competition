@@ -73,8 +73,67 @@ public class compe extends Application implements Runnable, VariablesInteface{
         long time = 1000 / fps;
         long wait = time - elapsed / 1000000;
         
+        
+        
+        
+        
+        
+        
+        listLanes.set(0, new Lane(0));
+        
+        Avatar primero = new Avatar();
+                
+        primero.setLocation(new Location(50,0,listLanes.get(0)));
+        primero.getLocation().getLane().setLineNumber(1);
+        primero.setSpeed(new Speed(1));
+        primero.setDirection(true);
+        
+        listLanes.get(0).getListAvatarsByLane().add(primero);
+        
+        listAvatars.add(primero);
+        
+        primero.start();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(compe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Avatar segundo = new Avatar();
+        segundo.setLocation(new Location(50,0,listLanes.get(0)));
+        segundo.getLocation().getLane().setLineNumber(1);
+        segundo.setSpeed(new Speed(2));
+        segundo.setDirection(true);
+        
+        
+        listLanes.get(0).getListAvatarsByLane().add(0,segundo);
+        listAvatars.add(segundo);
+        segundo.start();
+        
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(compe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Avatar tercero = new Avatar();
+        tercero.setLocation(new Location(50,0,listLanes.get(0)));
+        tercero.getLocation().getLane().setLineNumber(1);
+        tercero.setSpeed(new Speed(3));
+        tercero.setDirection(true);
+        
+        
+        listLanes.get(0).getListAvatarsByLane().add(0,tercero);
+        
+        
+        listAvatars.add(tercero);
+        
+        tercero.start();
+        
+        
         while(true){
             try {
+
                 Thread.sleep(wait);
                 draw(gc);
             } 
@@ -168,9 +227,10 @@ public class compe extends Application implements Runnable, VariablesInteface{
         for (int i = 0; i < listAvatars.size(); i++) {
             //System.out.println("i "+i);
             current = listAvatars.get(i);
-            Image img =  current.getFigure().getImage();
-            current.getFigure().setImage(img);
-            gc.drawImage(img, current.getLocation().getPosX(), current.getLocation().getPosY());
+            //Image img =  current.getFigure().getImage();
+            //current.getFigure().setImage(img);
+            //gc.drawImage(img, current.getLocation().getPosX(), current.getLocation().getPosY());
+            gc.fillRect(current.getLocation().getPosX(),current.getLocation().getPosY() , 15, 15);
         }
     }
     

@@ -18,6 +18,9 @@ public class main {
         LogicTrack lo = new LogicTrack();
         lo.makeLanes();        
         Application.launch(compe.class, args);
+
+
+
     }
     
 }
