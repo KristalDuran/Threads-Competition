@@ -17,14 +17,7 @@ public class main {
     public static void main(String[] args){
         LogicTrack lo = new LogicTrack();
         lo.makeLanes();        
-<<<<<<< HEAD
-        Application.launch(compe.class, args);
-
-
-
-=======
-        Application.launch(Competition.class,args);
->>>>>>> 0b8a8c7a3b60b5524491546f254b8317d696ea01
+        Application.launch(Competition.class, args);
     }
     
 }
