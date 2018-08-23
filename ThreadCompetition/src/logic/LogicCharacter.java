@@ -61,7 +61,7 @@ public class LogicCharacter implements VariablesInteface{
     public void changeSpeed(Character pCharacter) {
         // TODO implement here
         
-    }
+    } 
 
     
     public void makeAvatars(int pSpeed, int pValues){ 
@@ -111,8 +111,7 @@ public class LogicCharacter implements VariablesInteface{
         Location location = new Location();
         location.setPosY(10);
         Lane lane = logicTrack.defineLane();
-
-        location.setPosX(10 + (lane.getLineNumber()*40) + (lane.getLineNumber()*12+(listAvatars.size()*2)));
+        location.setPosX(10 + (lane.getLineNumber()*54));
         location.setLane(lane);
         return location;
     }
