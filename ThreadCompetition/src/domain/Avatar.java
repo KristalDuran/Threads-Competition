@@ -76,13 +76,15 @@ public class Avatar extends Thread implements VariablesInteface{
             try {
                 
                 while ((location.getPosY() <= 410 && location.getPosY() >= 9) || (this.isRevert == true && location.getPosY() >= 10)) {
+                    Thread.sleep(wait);
+                    indexInLine = getIndexInLane();
                     if((listLanes.get(lineNumber).getListAvatarsByLane().size() - 1) > indexInLine){
-                            if(Math.abs(listLanes.get(lineNumber).getListAvatarsByLane().get(indexInLine + 1).getLocation().getPosY() - this.getLocation().getPosY()) < 15){
+                            if(Math.abs(listLanes.get(lineNumber).getListAvatarsByLane().get(indexInLine + 1).getLocation().getPosY() - this.getLocation().getPosY()) < 83){
                                 continue;
                             }
                         }
-                    System.out.println("y "+location.getPosY());
-                    Thread.sleep(wait);
+                    //System.out.println("y "+location.getPosY());
+                    
                     if (this.isRevert == true) {
                         location.setPosY(location.getPosY() - 1);
                         changeImagen();

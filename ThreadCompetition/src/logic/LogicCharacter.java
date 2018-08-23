@@ -75,7 +75,7 @@ public class LogicCharacter implements VariablesInteface{
                 avatar.setFigure(figure);
                 avatar.setSpeed(new Speed(pSpeed));
                 avatar.setLocation(setLocation());
-                avatar.getLocation().getLane().getListAvatarsByLane().add(avatar);
+                avatar.getLocation().getLane().getListAvatarsByLane().add(0, avatar);
                 avatar.setSprite();
                 avatar.start();
                 listAvatars.add(avatar);
