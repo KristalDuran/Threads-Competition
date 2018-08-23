@@ -5,37 +5,37 @@
  */
 package graphicInterface;
 
-
-import domain.*;
-import java.awt.event.MouseEvent;
-import utility.Variables;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import logic.LogicCharacter;
-import utility.VariablesInteface;
-
+import domain.Avatar;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.nio.BufferOverflowException;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import logic.LogicCharacter;
+import utility.Variables;
+import utility.VariablesInteface;
+import static utility.VariablesInteface.listAvatars;
 
-public class compe extends Application implements Runnable, VariablesInteface{
+/**
+ *
+ * @author Kris
+ */
+public class Competition extends Application implements Runnable, VariablesInteface{
 
     private LogicCharacter logicCharacter = new LogicCharacter();   
     private Thread thread;
@@ -196,8 +196,8 @@ public class compe extends Application implements Runnable, VariablesInteface{
                 logicCharacter.changeDirection();
             });
             
-            this.btnInterrupt.setOnMouseMoved((event)->{
-                this.thread.interrupt();
+            this.btnInterrupt.setOnMouseClicked((event)->{
+                
             });
             
             this.btnSimulation.setOnMouseClicked((event)->{

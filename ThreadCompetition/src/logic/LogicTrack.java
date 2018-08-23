@@ -51,19 +51,14 @@ public class LogicTrack implements VariablesInteface{
     }
     
     public Lane defineLane(){
-        int totalAvatars = listAvatars.size();
-                
-        Lane lane = null;
-        if ( totalAvatars < 11 && totalAvatars >= 0 ) {
-            lane = listLanes.get(totalAvatars);
-        }else{
-            if (totalAvatars >= 11 && totalAvatars <=100) {
-                int position = (int) totalAvatars/11;
-                lane = listLanes.get(position);
-            }else{
-                
+        Lane lane = listLanes.get(0);
+        
+        for (int posLane = 1; posLane < listLanes.size(); posLane++) {
+            if(lane.getListAvatarsByLane().size() > listLanes.get(posLane).getListAvatarsByLane().size()){
+                lane = listLanes.get(posLane);
             }
         }
+        
         return lane;
     }
     

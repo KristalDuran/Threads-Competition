@@ -76,8 +76,10 @@ public class Avatar extends Thread implements VariablesInteface{
         
         while(true) {
             try {
-                while (location.getPosY() <= 410 || (this.isRevert && location.getPosY() > 0)) {
+                while ((location.getPosY() <= 410 && location.getPosY() >= 9) || (this.isRevert == true && location.getPosY() >= 10)) {
+                    System.out.println("y "+location.getPosY());
                     Thread.sleep(wait);
+<<<<<<< HEAD
                     indexInLine = getIndexInLane();
                     if((listLanes.get(lineNumber).getListAvatarsByLane().size() - 1) > indexInLine){
                         if(Math.abs(listLanes.get(lineNumber).getListAvatarsByLane().get(indexInLine + 1).getLocation().getPosY() - this.getLocation().getPosY()) < 15){
@@ -93,8 +95,17 @@ public class Avatar extends Thread implements VariablesInteface{
                     }else{
                         location.setPosY(location.getPosY() - 1);
                         //changeImagen();
+=======
+                    if (this.isRevert == true) {
+                        location.setPosY(location.getPosY() - 1);
+                        changeImagen();
+                    }else{
+                        location.setPosY(location.getPosY() + 1);
+                        changeImagen();
+>>>>>>> 0b8a8c7a3b60b5524491546f254b8317d696ea01
                     }
                 }
+                this.figure.setImage(null);
                 this.finalize();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Avatar.class.getName()).log(Level.SEVERE, null, ex);
@@ -125,12 +136,12 @@ public class Avatar extends Thread implements VariablesInteface{
             //poner imagen 
             figure.setImage(sprite.get(2));
         }else{
-            if(this.isRevert){
+            if(this.isRevert == true){
                 //set bien
-                figure.setImage(sprite.get(0));
+                figure.setImage(sprite.get(1));
             }else{
                 //set alverris
-                figure.setImage(sprite.get(1));
+                figure.setImage(sprite.get(0));
             }
         }
             
