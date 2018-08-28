@@ -93,8 +93,10 @@ public class Avatar extends Thread implements VariablesInteface{
                         changeImagen();
                     }
                 }
+                this.location.getLane().getListAvatarsByLane().remove(getIndexInLane());
                 this.figure.setImage(null);
-                this.finalize();
+                break;
+                //this.finalize();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Avatar.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Throwable ex) {

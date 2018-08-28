@@ -135,6 +135,7 @@ public class Competition extends Application implements Runnable, VariablesIntef
             
             this.btnRevert.setOnMouseClicked((event)->{
                 logicCharacter.changeDirection();
+                logicCharacter.invertArrays();
             });
             
             this.btnInterrupt.setOnMouseClicked((event)->{

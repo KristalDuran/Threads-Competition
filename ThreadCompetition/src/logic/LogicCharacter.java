@@ -6,6 +6,7 @@ import domain.Lane;
 import domain.Location;
 import domain.Speed;
 import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import utility.VariablesInteface;
@@ -52,6 +53,16 @@ public class LogicCharacter implements VariablesInteface{
                 listAvatars.get(posAvatar).setDirection(true);
             }
         }
+    }
+    
+    public void invertArrays(){
+    
+        for(int i = listLanes.size() -1; i >= 0; i--){
+        
+            Collections.reverse(listLanes.get(i).getListAvatarsByLane());
+            
+        }
+        
     }
 
     /**
