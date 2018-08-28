@@ -4,8 +4,8 @@ import domain.Avatar;
 import domain.Figure;
 import domain.Lane;
 import domain.Location;
-import domain.Speed;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,23 +46,55 @@ public class LogicCharacter implements VariablesInteface{
     public void changeDirection() {
         // TODO implement here
         for (int posAvatar = 0; posAvatar < listAvatars.size(); posAvatar++) {
-            if(listAvatars.get(posAvatar).getDirection() == true){
-                listAvatars.get(posAvatar).setDirection(false);
+            if(!(listAvatars.get(posAvatar).getFigure().getImage() == null)){
+                listAvatars.get(posAvatar).changeDirection();
+                listAvatars.get(posAvatar).changeImagen();
             }
             else{
-                listAvatars.get(posAvatar).setDirection(true);
+                listAvatars.remove(posAvatar);
             }
         }
     }
     
     public void invertArrays(){
-    
         for(int i = listLanes.size() -1; i >= 0; i--){
-        
             Collections.reverse(listLanes.get(i).getListAvatarsByLane());
-            
+        }
+    }
+    
+    private int[] stringToIntArray(String ints){
+         
+        String[] inputNumber =  ints.split(",");
+        
+        int number[] = new int[11];
+        
+        for(int i=0; i<number.length;i++){
+            if(i < inputNumber.length){
+                number[i] = Integer.parseInt(inputNumber[i]);
+            }
+            else{
+                number[i] = -1;
+            }
         }
         
+        return number;
+        
+    }
+    
+    public void setBarrier(String ints){
+            
+        if(ints.length() == 0){
+            for(int i = listLanes.size() -1; i >= 0; i--){
+                listLanes.get(i).setIsBarrier(!listLanes.get(i).isIsBarrier());
+            }        }
+        else{
+            int number[] = stringToIntArray(ints);
+            for(int i = number.length - 1; i >= 0; i--){
+                if(number[i] != -1){
+                    listLanes.get(number[i]).setIsBarrier(!listLanes.get(number[i]).isIsBarrier());
+                }
+            }
+        }
     }
 
     /**
@@ -77,6 +109,7 @@ public class LogicCharacter implements VariablesInteface{
     
     public void makeAvatars(int pSpeed, int pValues){ 
         System.out.println("Creando avatars");
+        
         try {
             for (int cantAvatars = 0; cantAvatars < pValues; cantAvatars++) {            
                 Avatar avatar;
@@ -84,10 +117,11 @@ public class LogicCharacter implements VariablesInteface{
                 Figure figure = setForm(pSpeed);
                 avatar.setDirection(false);
                 avatar.setFigure(figure);
-                avatar.setSpeed(new Speed(pSpeed));
+                avatar.setSpeed(pSpeed);
                 avatar.setLocation(setLocation());
                 avatar.getLocation().getLane().getListAvatarsByLane().add(0, avatar);
                 avatar.setSprite();
+                avatar.changeImagen();
                 avatar.start();
                 listAvatars.add(avatar);
             }

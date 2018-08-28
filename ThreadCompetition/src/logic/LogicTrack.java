@@ -9,6 +9,9 @@ import utility.VariablesInteface;
  */
 public class LogicTrack implements VariablesInteface{
 
+    
+    
+    
     /**
      * Default constructor
      */
@@ -37,6 +40,9 @@ public class LogicTrack implements VariablesInteface{
      * @param int [*] 
      * @return
      */
+    
+    
+    
     public void makeBarrier(ArrayList<Integer> pBarriers) {
         // TODO implement here
     }

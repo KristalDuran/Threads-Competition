@@ -128,9 +128,7 @@ public class Competition extends Application implements Runnable, VariablesIntef
             });
             
             this.btnBarrier.setOnMouseClicked((event)->{
-                //colocar barrera
-                //lo que se ingrese seria una lista de numeros, manejar eso bien
-                //logicCharacter.
+                logicCharacter.setBarrier(txtLanes.getText().toString());
             });
             
             this.btnRevert.setOnMouseClicked((event)->{
@@ -197,67 +195,3 @@ public class Competition extends Application implements Runnable, VariablesIntef
     };
 
 }
-
-
-
-
-/*
-private void initComponents(Stage primaryStage) {
-        try {
-            
-            this.root = new Group();
-            this.pane = new Pane();
-            this.scene = new Scene(this.pane, Variables.WIDTH, Variables.HEIGHT);
-            this.canvas = new Canvas(Variables.WIDTH, Variables.HEIGHT);
-            this.image = new Image(new FileInputStream("src/imgs/Track.JPG"));
-            this.pane.getChildren().add(this.canvas);
-            
-            primaryStage.setScene(this.scene);            
-            
-            this.btnCreat = new Button("Create");
-            this.btnBarrier = new Button("Barrier");
-            this.btnRevert = new Button("Revert");
-            this.btnSimulation = new Button("Simulation");
-            this.btnInterrupt = new Button("Interrupt");
-            
-            this.txtLanes = new TextArea();
-            this.txtSpeed = new TextArea();
-            this.txtValues = new TextArea();
-            
-            setDetails(btnCreat, null,80, 600, 190,30);
-            setDetails(btnBarrier, null, 300, 600, 100, 30);
-            setDetails(btnRevert, null, 410, 600, 100, 30);
-            setDetails(btnSimulation, null, 520, 600, 100, 30);
-            setDetails(btnInterrupt, null, 630, 550, 100, 80);
-            setDetails(null, txtSpeed, 70, 550, 100, 10);
-            setDetails(null, txtValues, 180, 550, 100, 10);
-            setDetails(null, txtLanes, 300, 550, 100, 10);
-            
-            root.getChildren().add(btnCreat);
-            root.getChildren().add(btnBarrier);
-            root.getChildren().add(btnRevert);
-            root.getChildren().add(btnSimulation);
-            root.getChildren().add(btnInterrupt);
-            root.getChildren().add(txtSpeed);
-            root.getChildren().add(txtValues);
-            root.getChildren().add(txtLanes);
-                        
-            //scene.setRoot(root);
-            
-            btnCreat.getOnMouseClicked();
-            btnCreat.setOnMouseClicked((event) -> {
-                logicCharacter.makeAvatars(Integer.parseInt(txtSpeed.getText()),
-                        Integer.parseInt(txtValues.getText()));
-            });
-            
-            logicCharacter.makeAvatars(1,3);
-            logicCharacter.makeAvatars(2,4);//esto es para prueba mientras se agrega los botones 
-            logicCharacter.makeAvatars(3,4);
-            
-            this.thread = new Thread(this);
-            this.thread.start();
-        } 
-        catch (FileNotFoundException ex){}
-        catch (BufferOverflowException ex){}
-    }
-*/

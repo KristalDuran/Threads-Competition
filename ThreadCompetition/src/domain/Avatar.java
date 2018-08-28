@@ -16,18 +16,19 @@ public class Avatar extends Thread implements VariablesInteface{
     public Avatar(){
     }
 
-    private Speed speed;
+    private int speed;
     private Location location;
+    private int direction = 1;
     private boolean isRevert;
     private Figure figure;
     private Image image;
     private ArrayList<Image> sprite = new ArrayList<>();
     
-    public Speed getSpeed() {
+    public int getSpeed() {
         return speed;
     }
 
-    public void setSpeed(Speed speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 
@@ -59,6 +60,10 @@ public class Avatar extends Thread implements VariablesInteface{
         return sprite;
     }
     
+    public void changeDirection(){
+        this.direction = this.direction * -1;
+    }
+    
     public void setSprite() throws FileNotFoundException{
         this.sprite.add(new Image(new FileInputStream(this.figure.getDirectionImage())));
         this.sprite.add(new Image(new FileInputStream(this.figure.getDirectionImageRevers())));
@@ -68,14 +73,14 @@ public class Avatar extends Thread implements VariablesInteface{
     @Override
     public void run(){
         
-        int wait = 100/speed.getSpeed();
+        int wait = 100/speed;
         int lineNumber = getLocation().getLane().getLineNumber() - 1;
-        int indexInLine = getIndexInLane();
+        int indexInLine;
                 
         while(true) {
             try {
                 
-                while ((location.getPosY() <= 410 && location.getPosY() >= 9) || (this.isRevert == true && location.getPosY() >= 10)) {
+                while(this.getLocation().getPosY() <= 410 && this.getLocation().getPosY() >= 9){
                     Thread.sleep(wait);
                     indexInLine = getIndexInLane();
                     if((listLanes.get(lineNumber).getListAvatarsByLane().size() - 1) > indexInLine){
@@ -83,20 +88,18 @@ public class Avatar extends Thread implements VariablesInteface{
                                 continue;
                             }
                         }
-                    //System.out.println("y "+location.getPosY());
-                    
-                    if (this.isRevert == true) {
-                        location.setPosY(location.getPosY() - 1);
-                        changeImagen();
-                    }else{
-                        location.setPosY(location.getPosY() + 1);
-                        changeImagen();
+                    if(listLanes.get(lineNumber).isIsBarrier() && Math.abs((this.location.getPosY() + this.direction) - 205) <= 0){
+                        continue;
                     }
+                    
+                    this.getLocation().setPosY( this.getLocation().getPosY() + this.direction);
+                    
+                    
+                    
                 }
                 this.location.getLane().getListAvatarsByLane().remove(getIndexInLane());
                 this.figure.setImage(null);
                 break;
-                //this.finalize();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Avatar.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Throwable ex) {
@@ -105,16 +108,13 @@ public class Avatar extends Thread implements VariablesInteface{
         }
     }
     
-    private void changeImagen(){
+    public void changeImagen(){
         if (figure.isIsForm()) {
-            //poner imagen 
             figure.setImage(sprite.get(2));
         }else{
-            if(this.isRevert == true){
-                //set bien
+            if(this.direction == -1){
                 figure.setImage(sprite.get(1));
             }else{
-                //set alverris
                 figure.setImage(sprite.get(0));
             }
         }

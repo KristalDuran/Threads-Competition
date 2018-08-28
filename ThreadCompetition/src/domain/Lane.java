@@ -10,6 +10,9 @@ public class Lane {
     /**
      * Default constructor
      */
+    
+    private boolean isBarrier = false;
+    
     public Lane() {
     }
 
@@ -35,5 +38,15 @@ public class Lane {
     public ArrayList<Avatar> getListAvatarsByLane() {
         return listAvatarsByLane;
     }
+
+    public boolean isIsBarrier() {
+        return isBarrier;
+    }
+
+    public void setIsBarrier(boolean isBarrier) {
+        this.isBarrier = isBarrier;
+    }
+    
+    
 
 }
