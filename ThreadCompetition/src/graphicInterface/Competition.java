@@ -43,6 +43,7 @@ public class Competition extends Application implements Runnable, VariablesIntef
     private Pane pane;
     private Canvas canvas;
     private Image image;
+    private Image barrierImage;
     private Button btnCreat;
     private Button btnBarrier;
     private Button btnRevert;
@@ -155,6 +156,7 @@ public class Competition extends Application implements Runnable, VariablesIntef
             });
             
             this.image = new Image(new FileInputStream("src/imgs/Track.JPG"));
+            this.barrierImage = new Image(new FileInputStream("src/imgs/barrier.png"));
             gc.drawImage(this.image , 50, 0);
             
             pane.getChildren().addAll(canvas, grid);
@@ -190,6 +192,14 @@ public class Competition extends Application implements Runnable, VariablesIntef
             current.getFigure().setImage(img);
             gc.drawImage(img, current.getLocation().getPosX(), current.getLocation().getPosY());
         }
+        
+        for(int i = 0; i < listLanes.size(); i++){
+            
+            if(listLanes.get(i).isIsBarrier()){
+                gc.drawImage(barrierImage, 7 + (i + 1) * 54, 240);
+            }
+        }
+        
     }
     
     /**
