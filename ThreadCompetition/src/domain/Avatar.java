@@ -20,9 +20,7 @@ public class Avatar extends Thread implements VariablesInteface{
     private int speed;
     private Location location;
     private int direction;
-    
     private Figure figure;
-    private Image image;
     private ArrayList<Image> sprite = new ArrayList<>();
     private boolean stopAvatar = false;
     
@@ -126,7 +124,6 @@ public class Avatar extends Thread implements VariablesInteface{
     public void changeImagen(){
         if (figure.isIsForm()) {
             figure.setImage(sprite.get(2));
-            
         }
         else{
             if(this.direction == -1){

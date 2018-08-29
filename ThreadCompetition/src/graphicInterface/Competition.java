@@ -140,7 +140,6 @@ public class Competition extends Application implements Runnable, VariablesIntef
             
             this.btnInterrupt.setOnMouseClicked((event)->{
                 logicCharacter.interrup();
-                this.thread.interrupt();
             });
             
             this.btnSimulation.setOnMouseClicked((event)->{
@@ -194,7 +193,7 @@ public class Competition extends Application implements Runnable, VariablesIntef
     }
     
     /**
-     * This method finish the programa when clicked x
+     * This var finish the programa when clicked x
      */
     EventHandler<WindowEvent> exit = new EventHandler<WindowEvent>() {
         @Override

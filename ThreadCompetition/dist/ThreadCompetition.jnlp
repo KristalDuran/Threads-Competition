@@ -8,7 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
+    <jar href="ThreadCompetition.jar" size="54472" download="eager" />
+=======
     <jar href="ThreadCompetition.jar" size="54381" download="eager" />
+>>>>>>> f033fd1e3744e57f7498ec9c187fe3ad55f1c75d
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="ThreadCompetition" >
     <param name="requiredFXVersion" value="8.0+"/>

@@ -21,7 +21,7 @@ import utility.VariablesInteface;
 public class LogicCharacter implements VariablesInteface{
     LogicTrack logicTrack = new LogicTrack();
     private boolean isForm = false;
-    private boolean isRevert = false;
+    private int isRevert = 1;
     private boolean stop = false;
     
     /**
@@ -50,8 +50,8 @@ public class LogicCharacter implements VariablesInteface{
     public void changeDirection() {
         // TODO implement here
         
-        this.isRevert = !this.isRevert;
-        
+        this.isRevert *= -1;
+        System.out.println("c " + isRevert);
         for (int posAvatar = 0; posAvatar < listAvatars.size(); posAvatar++) {
             if(!(listAvatars.get(posAvatar).getFigure().getImage() == null)){
                 listAvatars.get(posAvatar).changeDirection();
@@ -146,17 +146,11 @@ public class LogicCharacter implements VariablesInteface{
                 avatar.setLocation(setLocation());
                 avatar.getLocation().getLane().getListAvatarsByLane().add(0, avatar);
                 avatar.setSprite();
-                avatar.setStopAvatar(false);
-                if(isRevert){
-                    avatar.setDirection(-1);
-                }
-                if(!isRevert){
-                    avatar.setDirection(1);
-                }
+                avatar.setStopAvatar(false);                
+                avatar.setDirection(isRevert);
                 avatar.changeImagen();
                 avatar.getFigure().setIsForm(isForm);
-                
-                
+                avatar.changeImagen();
                 avatar.start();
                 listAvatars.add(avatar);
             }
@@ -200,7 +194,7 @@ public class LogicCharacter implements VariablesInteface{
         Location location = new Location();
         Lane lane = logicTrack.defineLane();
         location.setPosX(7 + (lane.getLineNumber()*54));
-        if(isRevert){
+        if(isRevert == -1){
             location.setPosY(410);
         }else
             location.setPosY(10);
