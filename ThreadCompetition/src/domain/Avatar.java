@@ -96,8 +96,13 @@ public class Avatar extends Thread implements VariablesInteface{
                                 continue;
                             }
                         }
-                        if(listLanes.get(lineNumber).isIsBarrier() && Math.abs((this.location.getPosY() + this.direction) - 205) <= 0){
-                            continue;
+                        if(listLanes.get(lineNumber).isIsBarrier()){
+                            if(Math.abs((this.location.getPosY() + this.direction) - 205) <= 0 && this.direction == 1){
+                                continue;
+                            }
+                            if(Math.abs((this.location.getPosY() + this.direction) - 270) <= 0 && this.direction == -1){
+                                continue;
+                            }  
                         }
                         
                         this.getLocation().setPosY(this.getLocation().getPosY() + this.direction);
