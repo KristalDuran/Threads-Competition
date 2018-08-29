@@ -16,5 +16,8 @@ import java.util.ArrayList;
 public interface VariablesInteface {
     public static ArrayList<Avatar> listAvatars = new ArrayList<>();
     public static ArrayList<Lane> listLanes = new ArrayList<>();
+    public static final int WIDTH = 930;
+    public static final int HEIGHT = 703;
+    public static final int WIDTH_WINDOW = 600;
     
 }

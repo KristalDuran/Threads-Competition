@@ -9,7 +9,8 @@ import javafx.scene.image.Image;
 import utility.VariablesInteface;
 
 /**
- * 
+ * This class has information about the avatar and also extends Thread and it has important run method
+ * @author Kristal and Jose
  */
 public class Avatar extends Thread implements VariablesInteface{
 
@@ -87,24 +88,20 @@ public class Avatar extends Thread implements VariablesInteface{
         int indexInLine;
                 
         while(true) {
-            try {
-                
+            try {                
                 while(this.getLocation().getPosY() <= 410 && this.getLocation().getPosY() >= 9){
                     Thread.sleep(wait);
                     indexInLine = getIndexInLane();
                     if(!stopAvatar){
-                        
-                    
                         if((listLanes.get(lineNumber).getListAvatarsByLane().size() - 1) > indexInLine){
-                                if(Math.abs(listLanes.get(lineNumber).getListAvatarsByLane().get(indexInLine + 1).getLocation().getPosY() - this.getLocation().getPosY()) < 83){
-                                    continue;
-                                }
+                            if(Math.abs(listLanes.get(lineNumber).getListAvatarsByLane().get(indexInLine + 1).getLocation().getPosY() - this.getLocation().getPosY()) < 83){
+                                continue;
                             }
+                        }
                         if(listLanes.get(lineNumber).isIsBarrier() && Math.abs((this.location.getPosY() + this.direction) - 205) <= 0){
                             continue;
                         }
-
-                        //this.getLocation().setPosY( this.getLocation().getPosY() + this.direction);
+//                        this.getLocation().setPosY( this.getLocation().getPosY() + this.direction);
                     Thread.sleep(wait);
                         if (this.isRevert == true) {
                             location.setPosY(location.getPosY() - 1);
@@ -116,8 +113,6 @@ public class Avatar extends Thread implements VariablesInteface{
                     }else{
                         Thread.sleep(wait);
                     }
-                    
-                    
                 }
                 this.location.getLane().getListAvatarsByLane().remove(getIndexInLane());
                 this.figure.setImage(null);
@@ -130,21 +125,25 @@ public class Avatar extends Thread implements VariablesInteface{
         }
     }
     
+    /**
+     * This method change the imagen betown car and form
+     */
     public void changeImagen(){
         if (figure.isIsForm()) {
             figure.setImage(sprite.get(2));
         }else{
             if(this.isRevert == true){
-                //set bien
                 figure.setImage(sprite.get(1));
             }else{
-                //set alverris
                 figure.setImage(sprite.get(0));
             }
         }
-            
     }
     
+    /**
+     * This method return the index of the lane in the array 
+     * @return int
+     */
     private int getIndexInLane(){
         int myListIndex = this.getLocation().getLane().getLineNumber() - 1;
         for(int i = listLanes.get(myListIndex).getListAvatarsByLane().size() -1; i >= 0; i--){

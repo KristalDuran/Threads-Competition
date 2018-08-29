@@ -3,29 +3,16 @@ package domain;
 import java.util.*;
 
 /**
- * 
+ * This class has the information important of the location of the avatar
+ * @author Kristal and Jose
  */
 public class Location {
 
-    /**
-     * Default constructor
-     */
     public Location() {
     }
 
-    /**
-     * 
-     */
     private int posX;
-
-    /**
-     * 
-     */
     private int posY;
-
-    /**
-     * 
-     */
     private Lane lane;
 
     public Location(int posX, int posY, Lane lane) {

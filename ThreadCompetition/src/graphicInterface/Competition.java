@@ -28,13 +28,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import logic.LogicCharacter;
-import utility.Variables;
 import utility.VariablesInteface;
 import static utility.VariablesInteface.listAvatars;
 
 /**
- *
- * @author Kris
+ *  This class containt the principal thread and all interface af the program
+ * @author Kristal and Jose
  */
 public class Competition extends Application implements Runnable, VariablesInteface{
 
@@ -84,16 +83,21 @@ public class Competition extends Application implements Runnable, VariablesIntef
         }
     }
 
+    /**
+     * This method set some importants data
+     * @param primaryStage
+     * @throws FileNotFoundException 
+     */
     private void initComponents(Stage primaryStage) throws FileNotFoundException {
         try {
             //pintar{
-            canvas = new Canvas(703, 600);
+            canvas = new Canvas(HEIGHT, WIDTH_WINDOW);
             gc = canvas.getGraphicsContext2D();
             //}
             
             //paneles{
             StackPane pane = new StackPane();
-            Scene scene = new Scene(pane, 703, 600);
+            Scene scene = new Scene(pane, HEIGHT, WIDTH_WINDOW);
             GridPane grid = new GridPane();
             //}
             
@@ -162,7 +166,6 @@ public class Competition extends Application implements Runnable, VariablesIntef
             
             pane.getChildren().addAll(canvas, grid);
             
-            
             primaryStage.setScene(scene);    
             
             this.thread = new Thread(this);
@@ -172,9 +175,13 @@ public class Competition extends Application implements Runnable, VariablesIntef
         catch (BufferOverflowException ex){}
     }
 
+    /**
+     * This method print all data and images that are necesary
+     * @param gc 
+     */
     private void draw(GraphicsContext gc){
         
-        gc.clearRect(0, 0, Variables.WIDTH, Variables.HEIGHT);
+        gc.clearRect(0, 0, WIDTH, HEIGHT);
         gc.drawImage(this.image, 50, 10); 
         Avatar current;
         for (int i = 0; i < listAvatars.size(); i++) {
@@ -186,6 +193,9 @@ public class Competition extends Application implements Runnable, VariablesIntef
         }
     }
     
+    /**
+     * This method finish the programa when clicked x
+     */
     EventHandler<WindowEvent> exit = new EventHandler<WindowEvent>() {
         @Override
         public void handle(WindowEvent event) {

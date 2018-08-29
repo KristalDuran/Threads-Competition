@@ -43,24 +43,6 @@ public class LogicCharacter implements VariablesInteface{
             //listAvatars.get(posAvatar).changeDirection();
         }
     }
-
-
-    /**
-     * @param Character 
-     * @return
-     */
-    /*public void changeDirection() {
-        // TODO implement here
-        for (int posAvatar = 0; posAvatar < listAvatars.size(); posAvatar++) {
-            if(!(listAvatars.get(posAvatar).getFigure().getImage() == null)){
-                listAvatars.get(posAvatar).changeDirection();
-                listAvatars.get(posAvatar).changeImagen();
-            }
-            else{
-                listAvatars.remove(posAvatar);
-            }
-        }
-    }*/
     
     /**
      * This method does a change or direction of the avatar
@@ -95,12 +77,20 @@ public class LogicCharacter implements VariablesInteface{
         }
     }
     
+    /**
+     * This methods change the orden of the array
+     */
     public void invertArrays(){
         for(int i = listLanes.size() -1; i >= 0; i--){
             Collections.reverse(listLanes.get(i).getListAvatarsByLane());
         }
     }
     
+    /**
+     * This method makes a list with the numbers in a string
+     * @param ints
+     * @return int[]
+     */
     private int[] stringToIntArray(String ints){
          
         String[] inputNumber =  ints.split(",");
@@ -115,17 +105,20 @@ public class LogicCharacter implements VariablesInteface{
                 number[i] = -1;
             }
         }
-        
         return number;
-        
     }
     
+    /**
+     * This method set the barrier of the thack
+     * @param ints 
+     */
     public void setBarrier(String ints){
             
         if(ints.length() == 0){
             for(int i = listLanes.size() -1; i >= 0; i--){
                 listLanes.get(i).setIsBarrier(!listLanes.get(i).isIsBarrier());
-            }        }
+            }        
+        }
         else{
             int number[] = stringToIntArray(ints);
             for(int i = number.length - 1; i >= 0; i--){
@@ -133,22 +126,15 @@ public class LogicCharacter implements VariablesInteface{
                     listLanes.get(number[i]).setIsBarrier(!listLanes.get(number[i]).isIsBarrier());
                 }
             }
-        }
-    }
-
-    /**
-     * @param Character 
-     * @return
-     */
-    public void changeSpeed(Character pCharacter) {
-        // TODO implement here
-        
+        }   
     } 
 
-    
+    /**
+     * This method makes the avatars with the speed that the user wants and set all data of that
+     * @param pSpeed
+     * @param pValues 
+     */
     public void makeAvatars(int pSpeed, int pValues){ 
-        System.out.println("Creando avatars");
-        
         try {
             for (int cantAvatars = 0; cantAvatars < pValues; cantAvatars++) {            
                 Avatar avatar;
@@ -162,6 +148,7 @@ public class LogicCharacter implements VariablesInteface{
                 avatar.setSprite();
                 avatar.setStopAvatar(false);
                 avatar.setDirection(isRevert);
+                avatar.getFigure().setIsForm(isForm);
                 avatar.start();
                 listAvatars.add(avatar);
             }
@@ -199,7 +186,7 @@ public class LogicCharacter implements VariablesInteface{
     
     /**
      * This method set the correct location of the avatar 
-     * @return 
+     * @return Location
      */
     public Location setLocation(){
         Location location = new Location();
@@ -239,9 +226,7 @@ public class LogicCharacter implements VariablesInteface{
      * This method control the time with the purpose of make many avatar in different times
      */
     public void simulation(){
-        
-        makeSimulation();
-        
+        makeSimulation();        
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         Runnable simulation = new Runnable() {
             public void run() { 
