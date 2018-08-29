@@ -23,6 +23,7 @@ public class LogicCharacter implements VariablesInteface{
     private boolean isForm = false;
     private int isRevert = 1;
     private boolean stop = false;
+    private int carCounter = 0;
     
     /**
      * Default constructor
@@ -138,7 +139,8 @@ public class LogicCharacter implements VariablesInteface{
         try {
             for (int cantAvatars = 0; cantAvatars < pValues; cantAvatars++) {            
                 Avatar avatar;
-                avatar = new Avatar();
+                avatar = new Avatar(carCounter);
+                carCounter++;
                 Figure figure = setForm(pSpeed);
                 //avatar.setDirection(false);
                 avatar.setFigure(figure);

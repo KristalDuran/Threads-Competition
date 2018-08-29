@@ -14,9 +14,10 @@ import utility.VariablesInteface;
  */
 public class Avatar extends Thread implements VariablesInteface{
 
-    public Avatar(){
+    public Avatar(int number){
+        this.myNumber = number;
     }
-
+    private int myNumber;
     private int speed;
     private Location location;
     private int direction;
@@ -32,6 +33,16 @@ public class Avatar extends Thread implements VariablesInteface{
         this.speed = speed;
     }
 
+    public int getMyNumber() {
+        return myNumber;
+    }
+
+    public void setMyNumber(int myNumber) {
+        myNumber = myNumber;
+    }
+
+    
+    
     public Location getLocation() {
         return location;
     }
@@ -84,6 +95,7 @@ public class Avatar extends Thread implements VariablesInteface{
         int wait = 100/speed;
         int lineNumber = getLocation().getLane().getLineNumber() - 1;
         int indexInLine;
+        System.out.println("my number es; " + myNumber);
                 
         while(true) {
             try {                
@@ -147,7 +159,8 @@ public class Avatar extends Thread implements VariablesInteface{
         int myListIndex = this.getLocation().getLane().getLineNumber() - 1;
         for(int i = listLanes.get(myListIndex).getListAvatarsByLane().size() -1; i >= 0; i--){
             if(listLanes.get(myListIndex).getListAvatarsByLane().get(i).getLocation().getPosX() == getLocation().getPosX() 
-                    && listLanes.get(myListIndex).getListAvatarsByLane().get(i).getLocation().getPosY() == getLocation().getPosY()){
+                    && listLanes.get(myListIndex).getListAvatarsByLane().get(i).getLocation().getPosY() == getLocation().getPosY()
+                    && listLanes.get(myListIndex).getListAvatarsByLane().get(i).getMyNumber() == this.myNumber){
                 return i;
             }
         }
