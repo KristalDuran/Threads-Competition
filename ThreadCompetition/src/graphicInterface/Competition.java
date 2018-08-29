@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -51,6 +52,7 @@ public class Competition extends Application implements Runnable, VariablesIntef
     private TextField txtSpeed;
     private TextField txtValues;
     private TextField txtLanes;
+    private RadioButton rbtFigure;
     private Group root;
     private Avatar avatar;
 
@@ -112,9 +114,11 @@ public class Competition extends Application implements Runnable, VariablesIntef
             this.txtSpeed.setPromptText("velocidad");
             this.txtValues.setPromptText("cantidad");
             //}
-
+            this.rbtFigure = new RadioButton();
+            this.rbtFigure.setText("Figure");
+            
             grid.addRow(0, txtSpeed, txtValues, btnBarrier, btnRevert, btnInterrupt);
-            grid.addRow(1, btnCreat, txtLanes, btnSimulation);
+            grid.addRow(1, btnCreat, txtLanes, btnSimulation, rbtFigure);
             grid.setHgap(10);
             grid.setVgap(10);
             grid.setPadding(new Insets(10, 10, 10, 10));
@@ -137,11 +141,20 @@ public class Competition extends Application implements Runnable, VariablesIntef
             });
             
             this.btnInterrupt.setOnMouseClicked((event)->{
-                
+                logicCharacter.interrup();
+                this.thread.interrupt();
             });
             
             this.btnSimulation.setOnMouseClicked((event)->{
-                //llamar a metodo simulacion 
+                logicCharacter.simulation(); 
+            });
+            
+            this.rbtFigure.setOnMouseClicked((event)->{
+                if(this.rbtFigure.isSelected()){
+                    logicCharacter.changeAvatar(true);
+                }else{
+                    logicCharacter.changeAvatar(false);
+                }
             });
             
             this.image = new Image(new FileInputStream("src/imgs/Track.JPG"));
@@ -170,20 +183,6 @@ public class Competition extends Application implements Runnable, VariablesIntef
             Image img =  current.getFigure().getImage();
             current.getFigure().setImage(img);
             gc.drawImage(img, current.getLocation().getPosX(), current.getLocation().getPosY());
-        }
-    }
-    
-    public void setDetails(Button button, TextArea txt, int x, int y, int width, int heigh){
-        if (button != null) {
-            button.setPrefHeight(heigh);
-            button.setPrefWidth(width);
-            button.setTranslateX(x);
-            button.setTranslateY(y);
-        }else{
-            txt.setPrefHeight(heigh);
-            txt.setPrefWidth(width);
-            txt.setTranslateX(x);
-            txt.setTranslateY(y);
         }
     }
     

@@ -23,6 +23,7 @@ public class Avatar extends Thread implements VariablesInteface{
     private Figure figure;
     private Image image;
     private ArrayList<Image> sprite = new ArrayList<>();
+    private boolean stopAvatar = false;
     
     public int getSpeed() {
         return speed;
@@ -56,6 +57,14 @@ public class Avatar extends Thread implements VariablesInteface{
         this.figure = figure;
     }
     
+    public boolean isStopAvatar() {
+        return stopAvatar;
+    }
+
+    public void setStopAvatar(boolean stopAvatar) {
+        this.stopAvatar = stopAvatar;
+    }
+    
     public ArrayList<Image> getSprite() {
         return sprite;
     }
@@ -83,17 +92,30 @@ public class Avatar extends Thread implements VariablesInteface{
                 while(this.getLocation().getPosY() <= 410 && this.getLocation().getPosY() >= 9){
                     Thread.sleep(wait);
                     indexInLine = getIndexInLane();
-                    if((listLanes.get(lineNumber).getListAvatarsByLane().size() - 1) > indexInLine){
-                            if(Math.abs(listLanes.get(lineNumber).getListAvatarsByLane().get(indexInLine + 1).getLocation().getPosY() - this.getLocation().getPosY()) < 83){
-                                continue;
+                    if(!stopAvatar){
+                        
+                    
+                        if((listLanes.get(lineNumber).getListAvatarsByLane().size() - 1) > indexInLine){
+                                if(Math.abs(listLanes.get(lineNumber).getListAvatarsByLane().get(indexInLine + 1).getLocation().getPosY() - this.getLocation().getPosY()) < 83){
+                                    continue;
+                                }
                             }
+                        if(listLanes.get(lineNumber).isIsBarrier() && Math.abs((this.location.getPosY() + this.direction) - 205) <= 0){
+                            continue;
                         }
-                    if(listLanes.get(lineNumber).isIsBarrier() && Math.abs((this.location.getPosY() + this.direction) - 205) <= 0){
-                        continue;
+
+                        //this.getLocation().setPosY( this.getLocation().getPosY() + this.direction);
+                    Thread.sleep(wait);
+                        if (this.isRevert == true) {
+                            location.setPosY(location.getPosY() - 1);
+                            changeImagen();
+                        }else{
+                            location.setPosY(location.getPosY() + 1);
+                            changeImagen();
+                        }
+                    }else{
+                        Thread.sleep(wait);
                     }
-                    
-                    this.getLocation().setPosY( this.getLocation().getPosY() + this.direction);
-                    
                     
                     
                 }
@@ -112,9 +134,11 @@ public class Avatar extends Thread implements VariablesInteface{
         if (figure.isIsForm()) {
             figure.setImage(sprite.get(2));
         }else{
-            if(this.direction == -1){
+            if(this.isRevert == true){
+                //set bien
                 figure.setImage(sprite.get(1));
             }else{
+                //set alverris
                 figure.setImage(sprite.get(0));
             }
         }

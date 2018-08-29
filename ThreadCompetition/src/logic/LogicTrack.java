@@ -9,45 +9,15 @@ import utility.VariablesInteface;
  */
 public class LogicTrack implements VariablesInteface{
 
-    
-    
-    
     /**
      * Default constructor
      */
     public LogicTrack() {
     }
-
-
-
+    
     /**
-     * @return
+     * This method make eleven lanes of the track 
      */
-    public void changeDirection() {
-        // TODO implement here
-      
-    }
-
-    /**
-     * @return
-     */
-    public void interrupt() {
-        // TODO implement here
-
-    }
-
-    /**
-     * @param int [*] 
-     * @return
-     */
-    
-    
-    
-    public void makeBarrier(ArrayList<Integer> pBarriers) {
-        // TODO implement here
-    }
-
-    
     public void makeLanes(){
         for (int i = 0; i < 11; i++) {
             Lane lane = new Lane();
@@ -56,6 +26,10 @@ public class LogicTrack implements VariablesInteface{
         }
     }
     
+    /**
+     * This method looks the correct lane of the panel
+     * @return Lane
+     */
     public Lane defineLane(){
         Lane lane = listLanes.get(0);
         

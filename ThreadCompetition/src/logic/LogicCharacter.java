@@ -7,6 +7,10 @@ import domain.Location;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import utility.VariablesInteface;
@@ -16,6 +20,10 @@ import utility.VariablesInteface;
  */
 public class LogicCharacter implements VariablesInteface{
     LogicTrack logicTrack = new LogicTrack();
+    private boolean isForm = false;
+    private boolean isRevert = false;
+    private boolean stop = false;
+    
     /**
      * Default constructor
      */
@@ -24,26 +32,24 @@ public class LogicCharacter implements VariablesInteface{
 
 
     /**
-     * @param Character 
-     * @return
+     * With this method the Imagen of the avatar can change, it can is figure or imagen 
+     * @param isImage 
      */
-    public void changeAvatar(Character pCharacter) {
+    public void changeAvatar(boolean isImage) {
+        this.isForm = isImage;
         // TODO implement here
         for (int posAvatar = 0; posAvatar < listAvatars.size(); posAvatar++) {
-            if(listAvatars.get(posAvatar).getFigure().isIsForm()){
-                listAvatars.get(posAvatar).getFigure().setIsForm(false);
-            }
-            else{
-                listAvatars.get(posAvatar).getFigure().setIsForm(true);
-            }
+            listAvatars.get(posAvatar).getFigure().setIsForm(isImage);
+            //listAvatars.get(posAvatar).changeDirection();
         }
     }
+
 
     /**
      * @param Character 
      * @return
      */
-    public void changeDirection() {
+    /*public void changeDirection() {
         // TODO implement here
         for (int posAvatar = 0; posAvatar < listAvatars.size(); posAvatar++) {
             if(!(listAvatars.get(posAvatar).getFigure().getImage() == null)){
@@ -52,6 +58,39 @@ public class LogicCharacter implements VariablesInteface{
             }
             else{
                 listAvatars.remove(posAvatar);
+            }
+        }
+    }*/
+    
+    /**
+     * This method does a change or direction of the avatar
+     */
+    public void changeDirection() {
+        // TODO implement here
+        for (int posAvatar = 0; posAvatar < listAvatars.size(); posAvatar++) {
+            if(listAvatars.get(posAvatar).getDirection() == true){
+                listAvatars.get(posAvatar).setDirection(false);
+                isRevert = false;
+            }
+            else{
+                listAvatars.get(posAvatar).setDirection(true);
+                isRevert = true;
+            }
+        }
+    }
+    
+    /**
+     * This method stop all avatar that are running
+     */
+    public void interrup() {
+        
+        for (int i = 0; i < listAvatars.size(); i++) {
+            if (listAvatars.get(i).isStopAvatar()) {
+                stop = false;
+                listAvatars.get(i).setStopAvatar(false);
+            }else{
+                listAvatars.get(i).setStopAvatar(true);
+                stop = true;
             }
         }
     }
@@ -121,7 +160,8 @@ public class LogicCharacter implements VariablesInteface{
                 avatar.setLocation(setLocation());
                 avatar.getLocation().getLane().getListAvatarsByLane().add(0, avatar);
                 avatar.setSprite();
-                avatar.changeImagen();
+                avatar.setStopAvatar(false);
+                avatar.setDirection(isRevert);
                 avatar.start();
                 listAvatars.add(avatar);
             }
@@ -130,6 +170,11 @@ public class LogicCharacter implements VariablesInteface{
             }
     }
     
+    /**
+     * This method set the form of the avatar depending of the case
+     * @param pSpeed
+     * @return Figure
+     */
     public Figure setForm(int pSpeed){
         Figure figure = new Figure();
         switch (pSpeed) {
@@ -152,20 +197,64 @@ public class LogicCharacter implements VariablesInteface{
         return figure;
     }
     
+    /**
+     * This method set the correct location of the avatar 
+     * @return 
+     */
     public Location setLocation(){
         Location location = new Location();
-        location.setPosY(10);
         Lane lane = logicTrack.defineLane();
-        location.setPosX(10 + (lane.getLineNumber()*54));
+        location.setPosX(7 + (lane.getLineNumber()*54));
+        if(isRevert){
+            location.setPosY(410);
+        }else
+            location.setPosY(10);
+        
         location.setLane(lane);
         return location;
     }
     
+    /**
+     * This method parse a string to integer
+     * @param text
+     * @return int
+     */
     public int getInteger(String text){
         if(text != null || text != ""){
             return Integer.parseInt(text);
         }
         return 0;
+    }
+    
+    /**
+     * This method make the avatars with random speed and account
+     */
+    public void makeSimulation(){
+        int speed = (int) (Math.random() * 3) + 1;
+        int value = (int) (Math.random() * 11) + 1;
+        makeAvatars(speed, value);
+    }
+    
+    /**
+     * This method control the time with the purpose of make many avatar in different times
+     */
+    public void simulation(){
+        
+        makeSimulation();
+        
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        Runnable simulation = new Runnable() {
+            public void run() { 
+                if(stop == false){
+                    makeSimulation();
+                } 
+            } 
+        };
+        
+        ScheduledFuture<?> simulationHandle = scheduler.scheduleAtFixedRate(simulation, 10, 10, SECONDS);
+        scheduler.schedule(new Runnable() {
+            public void run() { simulationHandle.cancel(true); }
+        }, 60 * 60, SECONDS);
     }
     
 }
