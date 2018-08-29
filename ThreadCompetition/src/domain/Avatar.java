@@ -19,8 +19,8 @@ public class Avatar extends Thread implements VariablesInteface{
 
     private int speed;
     private Location location;
-    private int direction = 1;
-    private boolean isRevert;
+    private int direction;
+    
     private Figure figure;
     private Image image;
     private ArrayList<Image> sprite = new ArrayList<>();
@@ -42,16 +42,16 @@ public class Avatar extends Thread implements VariablesInteface{
         this.location = location;
     }
 
-    public boolean getDirection() {
-        return isRevert;
-    }
-
-    public void setDirection(boolean direction) {
-        this.isRevert = direction;
-    }
-
     public Figure getFigure() {
         return figure;
+    }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
     }
 
     public void setFigure(Figure figure) {
@@ -101,16 +101,11 @@ public class Avatar extends Thread implements VariablesInteface{
                         if(listLanes.get(lineNumber).isIsBarrier() && Math.abs((this.location.getPosY() + this.direction) - 205) <= 0){
                             continue;
                         }
-//                        this.getLocation().setPosY( this.getLocation().getPosY() + this.direction);
-                    Thread.sleep(wait);
-                        if (this.isRevert == true) {
-                            location.setPosY(location.getPosY() - 1);
-                            changeImagen();
-                        }else{
-                            location.setPosY(location.getPosY() + 1);
-                            changeImagen();
-                        }
-                    }else{
+                        
+                        this.getLocation().setPosY(this.getLocation().getPosY() + this.direction);
+                        
+                    }
+                    else{
                         Thread.sleep(wait);
                     }
                 }
@@ -131,8 +126,10 @@ public class Avatar extends Thread implements VariablesInteface{
     public void changeImagen(){
         if (figure.isIsForm()) {
             figure.setImage(sprite.get(2));
-        }else{
-            if(this.isRevert == true){
+            
+        }
+        else{
+            if(this.direction == -1){
                 figure.setImage(sprite.get(1));
             }else{
                 figure.setImage(sprite.get(0));
