@@ -22,7 +22,7 @@ public class Avatar extends Thread implements VariablesInteface{
     private int direction = 1;
     private boolean isRevert;
     private Figure figure;
-    private Image image;
+    //private Image image;
     private ArrayList<Image> sprite = new ArrayList<>();
     private boolean stopAvatar = false;
     
