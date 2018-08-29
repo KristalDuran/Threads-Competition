@@ -90,26 +90,20 @@ public class Competition extends Application implements Runnable, VariablesIntef
      */
     private void initComponents(Stage primaryStage) throws FileNotFoundException {
         try {
-            //pintar{
+
             canvas = new Canvas(HEIGHT, WIDTH_WINDOW);
             gc = canvas.getGraphicsContext2D();
-            //}
-            
-            //paneles{
+
             StackPane pane = new StackPane();
             Scene scene = new Scene(pane, HEIGHT, WIDTH_WINDOW);
             GridPane grid = new GridPane();
-            //}
-            
-            //botones{
+
             this.btnCreat = new Button("Create");
             this.btnBarrier = new Button("Barrier");
             this.btnRevert = new Button("Revert");
             this.btnSimulation = new Button("Simulation");
             this.btnInterrupt = new Button("Interrupt");
-            //}
-            
-            //txt{
+
             this.txtLanes = new TextField();
             this.txtSpeed = new TextField();
             this.txtValues = new TextField();
@@ -117,7 +111,7 @@ public class Competition extends Application implements Runnable, VariablesIntef
             this.txtLanes.setPromptText("carriles");
             this.txtSpeed.setPromptText("velocidad");
             this.txtValues.setPromptText("cantidad");
-            //}
+
             this.rbtFigure = new RadioButton();
             this.rbtFigure.setText("Figure");
             
@@ -184,8 +178,12 @@ public class Competition extends Application implements Runnable, VariablesIntef
         gc.drawImage(this.image, 50, 10); 
         Avatar current;
         for (int i = 0; i < listAvatars.size(); i++) {
-            //System.out.println("i "+i);
+            
             current = listAvatars.get(i);
+            if(current.getFigure().getImage() == null){
+                listAvatars.remove(i);
+                continue;
+            }
             Image img =  current.getFigure().getImage();
             current.getFigure().setImage(img);
             gc.drawImage(img, current.getLocation().getPosX(), current.getLocation().getPosY());

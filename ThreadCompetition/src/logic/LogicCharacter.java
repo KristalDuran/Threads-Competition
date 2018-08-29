@@ -21,7 +21,7 @@ import utility.VariablesInteface;
 public class LogicCharacter implements VariablesInteface{
     LogicTrack logicTrack = new LogicTrack();
     private boolean isForm = false;
-    private boolean isRevert = false;
+    private int isRevert = 1;
     private boolean stop = false;
     
     /**
@@ -40,7 +40,7 @@ public class LogicCharacter implements VariablesInteface{
         // TODO implement here
         for (int posAvatar = 0; posAvatar < listAvatars.size(); posAvatar++) {
             listAvatars.get(posAvatar).getFigure().setIsForm(isImage);
-            //listAvatars.get(posAvatar).changeDirection();
+            listAvatars.get(posAvatar).changeImagen();
         }
     }
     
@@ -49,14 +49,13 @@ public class LogicCharacter implements VariablesInteface{
      */
     public void changeDirection() {
         // TODO implement here
+        
+        this.isRevert *= -1;
+        System.out.println("c " + isRevert);
         for (int posAvatar = 0; posAvatar < listAvatars.size(); posAvatar++) {
-            if(listAvatars.get(posAvatar).getDirection() == true){
-                listAvatars.get(posAvatar).setDirection(false);
-                isRevert = false;
-            }
-            else{
-                listAvatars.get(posAvatar).setDirection(true);
-                isRevert = true;
+            if(!(listAvatars.get(posAvatar).getFigure().getImage() == null)){
+                listAvatars.get(posAvatar).changeDirection();
+                listAvatars.get(posAvatar).changeImagen();
             }
         }
     }
@@ -70,6 +69,7 @@ public class LogicCharacter implements VariablesInteface{
             if (listAvatars.get(i).isStopAvatar()) {
                 stop = false;
                 listAvatars.get(i).setStopAvatar(false);
+                
             }else{
                 listAvatars.get(i).setStopAvatar(true);
                 stop = true;
@@ -140,15 +140,17 @@ public class LogicCharacter implements VariablesInteface{
                 Avatar avatar;
                 avatar = new Avatar();
                 Figure figure = setForm(pSpeed);
-                avatar.setDirection(false);
+                //avatar.setDirection(false);
                 avatar.setFigure(figure);
                 avatar.setSpeed(pSpeed);
                 avatar.setLocation(setLocation());
                 avatar.getLocation().getLane().getListAvatarsByLane().add(0, avatar);
                 avatar.setSprite();
-                avatar.setStopAvatar(false);
+                avatar.setStopAvatar(false);                
                 avatar.setDirection(isRevert);
+                avatar.changeImagen();
                 avatar.getFigure().setIsForm(isForm);
+                avatar.changeImagen();
                 avatar.start();
                 listAvatars.add(avatar);
             }
@@ -192,7 +194,7 @@ public class LogicCharacter implements VariablesInteface{
         Location location = new Location();
         Lane lane = logicTrack.defineLane();
         location.setPosX(7 + (lane.getLineNumber()*54));
-        if(isRevert){
+        if(isRevert == -1){
             location.setPosY(410);
         }else
             location.setPosY(10);
