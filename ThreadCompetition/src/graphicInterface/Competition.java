@@ -78,7 +78,6 @@ public class Competition extends Application implements Runnable, VariablesIntef
             try {
                 Thread.sleep(wait);
                 draw(gc);
-                System.out.println(listAvatars.size());
             } 
             catch (InterruptedException ex) {}
         }
@@ -182,10 +181,12 @@ public class Competition extends Application implements Runnable, VariablesIntef
         for (int i = 0; i < listAvatars.size(); i++) {
             
             current = listAvatars.get(i);
+            
             if(current.getFigure().getImage() == null){
                 listAvatars.remove(i);
                 continue;
             }
+            
             Image img =  current.getFigure().getImage();
             current.getFigure().setImage(img);
             gc.drawImage(img, current.getLocation().getPosX(), current.getLocation().getPosY());
